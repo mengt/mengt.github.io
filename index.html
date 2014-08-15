@@ -10,7 +10,17 @@
 
     <title>Welcome to My Blod</title>
     
-    <style> 
+    <style>
+    .titles a {
+			display: inline-block;
+			padding: .4em 1em;
+			font-size:16px;
+			color: #cc6633;
+		}
+		.titles a:hover {
+			color: #cccc99;
+		}
+
       /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */ 
     </style> 
   </head>
@@ -31,15 +41,13 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-      <div>
-        <h3>
+      <div class="titles">
         <a name="Python WSGI"  href="myblog/wgsi.html">
-            <span class="octicon octicon-link">Python WSGI.</span>
+            <span class="octicon octicon-link"><h3>Python WSGI</h3></span>
         </a>
-        </h3>
         <span style="color:darkgray;float:right;">On August 16, 2014</span>
       </div>
-<p>Python Web 开发中，服务端程序可以分为两个部分，一是服务器程序，二是应用程序。前者负责把客户端请求接收，整理，后者负责具体的逻辑处理。为了方便应用程序的开发，我们把常用的功能封装起来，成为各种Web开发框架，例如 Django, Flask, Tornado。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用......</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Python Web 开发中，服务端程序可以分为两个部分，一是服务器程序，二是应用程序。前者负责把客户端请求接收，整理，后者负责具体的逻辑处理。为了方便应用程序的开发，我们把常用的功能封装起来，成为各种Web开发框架，例如 Django, Flask, Tornado。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用......</p>
 <p><!--<a href="myblog/wgsi.html">阅读全文>></a>--></p>
 
 <h3>
