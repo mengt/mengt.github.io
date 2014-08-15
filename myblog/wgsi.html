@@ -1,9 +1,28 @@
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head>
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-<title>ExtJs</title></head>
-<body>
+<!DOCTYPE html>
+<html>
 
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
 <h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
 WSGI 简介</h1>
 <h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
@@ -421,27 +440,18 @@ except:
 <p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
 如果服务器程序要实现 HTTP 1.1，那么它必须提供对 HTTP 1.1&nbsp;<code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px 2px; padding:0px 5px; border:1px solid rgb(221,221,221); background-color:rgb(248,248,248); white-space:nowrap">expect/continue</code>机制的支持。</p>
 <h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
-<a target="_blank" target="_blank" name="%E5%85%B6%E5%AE%83%E5%86%85%E5%AE%B9" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#%E5%85%B6%E5%AE%83%E5%86%85%E5%AE%B9" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>其它内容</h2>
-<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-在 PEP 3333 中，还包含了其它内容，例如：</p>
-<ul style="padding:0px 0px 0px 30px; margin:15px 0px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-<li style="">HTTP 特性</li><li style="">线程支持</li><li style="">实现时需要注意的地方：包括，扩展API，应用程序配置，URL重建等</li></ul>
-<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-这里就不作过多介绍了。</p>
-<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
-<a target="_blank" target="_blank" name="%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>扩展阅读</h2>
-<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-这篇文章主要是我阅读 PEP 3333 后的理解和记录，有些地方可能没有理解正确或者没有写全，下面提供一些资源供扩展阅读。</p>
-<ul style="padding:0px 0px 0px 30px; margin:15px 0px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-<li style=""><a target="_blank" target="_blank" href="http://www.python.org/dev/peps/pep-3333/" style="color:rgb(65,131,196); text-decoration:none">PEP 3333</a><br style="">
-不解释</li><li style=""><a target="_blank" target="_blank" href="http://wsgi.readthedocs.org/en/latest/" style="color:rgb(65,131,196); text-decoration:none">WSGI org</a><br style="">
-看起来好像官方网站的样子，覆盖了关于WSGI的方方面面，包含学习资源，支持WSGI的框架列表，服务器列表，应用程序列表，middleware和库等等。</li><li style=""><a target="_blank" target="_blank" href="https://pypi.python.org/pypi/wsgiref" style="color:rgb(65,131,196); text-decoration:none">wsgiref</a><br style="">
-WSGI的参考实现，阅读源代码后有利于对WSGI的理解。我在GitHub上有自己阅读后的注释版本，并且作了一些图，有需要可以看这里：<a target="_blank" target="_blank" href="https://github.com/minixalpha/SourceLearning/tree/master/wsgiref-0.1.2" style="color:rgb(65,131,196); text-decoration:none">wsgiref 源代码阅读</a></li></ul>
-<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
-另外，还有一些文章介绍了一些基本概念和一些有用的实例，非常不错。</p>
-<ul style="padding:0px 0px 0px 30px; margin-top:15px; margin-right:0px; margin-left:0px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px; margin-bottom:0px!important">
-<li style=""><a target="_blank" target="_blank" href="http://blog.kenshinx.me/blog/wsgi-research/" style="color:rgb(65,131,196); text-decoration:none">Wsgi研究</a></li><li style=""><a target="_blank" target="_blank" href="http://linluxiang.iteye.com/blog/799163" style="color:rgb(65,131,196); text-decoration:none">wsgi初探</a></li></ul>
+<a target="_blank" target="_blank" name="%E5%85%B6%E5%AE%83%E5%86%85%E5%AE%B9" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#%E5%85%B6%E5%AE%83%E5%86%85%E5%AE%B9" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
 
 </div>
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
 </body>
 </html>
