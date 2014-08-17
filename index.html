@@ -9,7 +9,25 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
      <script type=text/javascript>
       /*document.write('你的浏览器标识：',navigator.userAgent,'<br>');*/
-      if (navigator.userAgent.match(/^Mozilla/)){}else{window.location.href="blog.html";} 
+      /*if (navigator.userAgent.match(/^Mozilla/)){}else{window.location.href="blog.html";} */
+    <!-- 
+    //平台、设备和操作系统  
+      var system ={ 
+          win : false, 
+          mac : false,  
+          xll : false 
+      }; 
+      //检测平台  
+      var p = navigator.platform; 
+      system.win = p.indexOf("Win") == 0; 
+      system.mac = p.indexOf("Mac") == 0; 
+      system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+      //跳转语句  
+      if(system.win||system.mac||system.xll){//转向后台登陆页面 
+      }else{ 
+          window.location.href="blog.html"; 
+      } 
+      --> 
     </script>
   </head>
   <body>
