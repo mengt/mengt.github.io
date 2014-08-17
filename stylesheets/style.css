@@ -76,7 +76,7 @@ a{
  HOME
  *******************************/
 #home {
-  background-image: url('../images/home.jpg');
+  background-image: url('images/home.jpg');
   background-color: #F3F3F3;
   background-repeat:repeat-y;
   background-position:center 0;
