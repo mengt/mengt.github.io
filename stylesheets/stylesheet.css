@@ -421,3 +421,23 @@ Small Device Styles
   }
 
 }
+/*******************************************************************************
+The custom Styles
+*******************************************************************************/
+.titles a {
+  /* display: inline-block;
+  padding: .4em 1em;
+  font-size:16px;*/ 
+  color: black;
+}
+.titles a:hover {
+  color: cornflowerblue;
+}
+h3 span{
+  margin-top:7px;
+  font-size:17px;
+  color:darkgray;
+  float:right;
+  font-weight:normal;
+}
+/* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */ 
