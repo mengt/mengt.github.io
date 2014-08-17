@@ -437,4 +437,30 @@ h3 span{
   float:right;
   font-weight:normal;
 }
+
+.navigation {
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  right: 50%;
+}
+
+.navigation li {
+  /*border: solid 2px red;*/
+  display: block;
+  padding-left: 40px;
+  /*line-height: 60px;*/
+  text-align: left;
+  float: left;
+  font-size: 18px;
+}
+.navigation a{
+  color: #fff;
+}
+.navigation li a:hover, .active {
+  text-decoration:none;
+  cursor: pointer;
+  color: #0D0B0B;
+}
+
 /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */ 
