@@ -78,6 +78,8 @@ a{
 #home {
   background-image: url('../images/home.jpg');
   background-color: #F3F3F3;
+  background-repeat:repeat-y;
+  background-position:center 0;
 }
 .slide {
   background-attachment: fixed;
