@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+版本控制工具git教程中文版:第一部分</h1>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+Git 魔法</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+免费Git伺服：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+http://repo.or.cz/ 为自由项目提供服务。第一个Git服务器。 由最早的Git开发人员创建和维护。
+http://gitorious.org/ 是另一个Git服务站点，为开源项 目提供服务。
+http://github.com/ 开源项目免费，私有项目收钱。
+感谢以上站点为本文档提供伺服服务。
+许可
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+本指南在 GNU通用公共许可协议版本3 之下发布。很自然，源码保存在一个Git仓库里，可以通过以下命令获得源码：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git clone git://repo.or.cz/gitmagic.git # 创建“gitmagic”目录.
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+或从以下镜像得到：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git clone git://github.com/blynn/gitmagic.git
+$ git clone git://gitorious.org/gitmagic/mainline.git
+</code></pre>
+ 
+
+
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+第 1 章 入门</h1>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+目录</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+工作是玩 版本控制 分布控制 一个误区 合并冲突
+我将用类比方式来介绍版本控制的概念。更严谨的解释参见 维基百科版本修订控制条目。
+</p>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+工作是玩
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我从小就玩电脑游戏。相反，我只是在长大后才开始使用版本控制系统。我想我并不特 殊，并且，对比两者工作方式可使这些概念更易解释，也易于理解。
+
+编写代码，或编辑文档和玩游戏差不多。在你做出了很多进展之后，你最好保存一下。 去做这个，会点击你所信任的编辑器保存按钮就好了。
+
+但这将覆盖老版本。就像那些学校里玩的老游戏，只有一个存档：你确实可以保存，但 你不能回到更老的状态了。这真让人扫兴，因为那个状态可能恰好保存了这个游戏特别 有意思一关，说不定哪天你想再玩一下呢。或者更糟糕的，你当前的保存是个必败局， 这样你就不得不从头开始玩了。
+</p>
+ 
+
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+版本控制
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在编辑的时候，如果想保留旧版本，你可以将文件“另存为”一个不同的文件，或在保 存之前将文件拷贝到别处。你可能压缩这些文件以节省空间。这是一个初级的靠手工的 版本控制方式。游戏软件早就提高了这块，很多都提供多个基于时间戳的自动存档槽。
+
+让我们看看稍稍复杂的情况。比如你有很多放在一起的文件，比如项目源码，或网站文 件。现在如你想保留旧版本，你不得不把整个目录存档。手工保存多个版本很不方便， 而且很快会耗费巨大。
+
+在一些电脑游戏里，一个存档真的包含在一个充满文件的目录里。这些游戏为玩家屏蔽 了这些细节，并提供一个方便易用的界面来管理该目录的不同版本。
+
+版本控制系统也没有两样。两者提供友好的界面，来管理目录里的东西。你可以频繁保 存，也可以之后加载任一保存。不像大多计算机游戏，版本控制系统通常精于节省存储 空间。一般情况如果两个版本间只有少数文件的变更，每个文件的变更也不大，那就只 存储差异的部分，而不是把全部拷贝的都保存下来，以节省存储空间。
+</p>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+ <a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+分布控制
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在设想一个很难的游戏。太难打了，以至于世界各地很多骨灰级玩家决定组队，分享 他们游戏存档以攻克它。Speedrun们就是实际中的例子：在同一个游戏里，玩家们分别 攻克不同的等级，协同工作以创造惊人战绩。
+
+你如何搭建一个系统，使得他们易于得到彼此的存档？并易于上载新的存档？
+
+在过去，每个项目都使用中心式版本控制。某个服务器上放所有保存的游戏记录。其他 人就不用了。每个玩家在他们机器上最多保留几个游戏记录。当一个玩家想更新进度时 候，他们需要把最新进度从主服务器下载下来，玩一会儿，保存并上载到主服务器以供 其他人使用。
+
+假如一个玩家由于某种原因，想得到一个较旧版本的游戏进度怎么样？或许当前保存的 游戏是一个注定的败局，因为某人在第三级忘记捡某个物品；他们希望能找到最近一个 可以完成的游戏记录。或者他们想比较两个旧版本间的差异，来估算某个特定玩家干了 多少活。
+
+查看旧版本的理由有很多，但检查的办法都是一样的。他们必须去问中心服务器要那个 旧版本的记录。需要的旧版本越多，和服务器的交互就越多。
+
+新一代的版本控制系统，Git就是其中之一，是分布式的，可以被认作广义上的中心式系 统。从主服务器下载时玩家会得到所有保存的记录，而不仅是最新版。这看起来他们好 像把中心服务器做了个镜像。
+
+最初的克隆操作可能比较费时，特别当有很长历史的时，但从长远看这是值得的。一个 显而易见的好处是，当查看一个旧版本时，不再需要和中心服务器通讯了。
+ 
+</p>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+ <a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+分布控制
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在设想一个很难的游戏。太难打了，以至于世界各地很多骨灰级玩家决定组队，分享 他们游戏存档以攻克它。Speedrun们就是实际中的例子：在同一个游戏里，玩家们分别 攻克不同的等级，协同工作以创造惊人战绩。
+
+你如何搭建一个系统，使得他们易于得到彼此的存档？并易于上载新的存档？
+
+在过去，每个项目都使用中心式版本控制。某个服务器上放所有保存的游戏记录。其他 人就不用了。每个玩家在他们机器上最多保留几个游戏记录。当一个玩家想更新进度时 候，他们需要把最新进度从主服务器下载下来，玩一会儿，保存并上载到主服务器以供 其他人使用。
+
+假如一个玩家由于某种原因，想得到一个较旧版本的游戏进度怎么样？或许当前保存的 游戏是一个注定的败局，因为某人在第三级忘记捡某个物品；他们希望能找到最近一个 可以完成的游戏记录。或者他们想比较两个旧版本间的差异，来估算某个特定玩家干了 多少活。
+
+查看旧版本的理由有很多，但检查的办法都是一样的。他们必须去问中心服务器要那个 旧版本的记录。需要的旧版本越多，和服务器的交互就越多。
+
+新一代的版本控制系统，Git就是其中之一，是分布式的，可以被认作广义上的中心式系 统。从主服务器下载时玩家会得到所有保存的记录，而不仅是最新版。这看起来他们好 像把中心服务器做了个镜像。
+
+最初的克隆操作可能比较费时，特别当有很长历史的时，但从长远看这是值得的。一个 显而易见的好处是，当查看一个旧版本时，不再需要和中心服务器通讯了。
+ 
+</p>
+
+
+ 
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+ <a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+一个误区
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一个很常见的错误观念是，分布式系统不适合需要官方中心仓库的项目。这与事实并不 相符。给谁照相也不会偷走他们的灵魂。类似地，克隆主仓库并不降低它的重要性。
+
+一般来说，一个中心版本控制系统能做的任何事，一个良好设计的分布式系统都能做得 更好。网络资源总要比本地资源耗费更费。不过我们应该在稍后分析分布式方案的缺点， 这样人们才不会按照习惯做出错误的比较。
+
+一个小项目或许只需要分布式系统提供的一小部分功能，但是，在项目很小的时候，应 该用规划不好的系统？就好比说，在计算较小数目的时候应该使用罗马数字？
+
+而且，你的项目的增长可能会超出你最初的预期。从一开始就使用Git好似带着一把瑞士 军刀，尽管你很多时候只是用它来开开瓶盖。某天你迫切需要一把改锥，你就会庆幸你 所有的不单单是一个启瓶器。
+</p>
+
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+ <a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+合并冲突
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对于这个话题，电脑游戏的类比显得不够用。那让我们再来看看文档编辑的情况吧。
+
+假设Alice在文档开头插入一行，并且Bob在文档末尾添加一行。他们都上传了他们的改 动。大多数系统将自动给出一个合理的处理方式：接受且合并他们的改动，这样Alice和 Bob两人的改动都会生效。
+
+现在假设Alice和Bob对文件的同一行做了不同的改动。如果没有人工参与的话，这个冲 突是无法解决的。第二个人在上载文件时，会收到 合并冲突 的通知，要么用一个人 的改动覆盖另一个的，要么完全修订这一行。
+
+更复杂的情况也可能出现。版本控制系统自己处理相对简单的情况，把困难的情况留给 人来处理。它们的行为通常是可配置的。
+</p>
+
+
+ 
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+第 2 章 基本技巧</h1>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+目录</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+保存状态 添加、删除、重命名 进阶撤销/重做 撤销 变更日志生成 下载文件 到最新 快速发布 我们已经做了什么？ 练习
+与其一头扎进Git命令的海洋中，不如来点基本的例子试试手。它们简单而且实用。实际 上，在开始使用Git的头几个月，我所用的从来没超出本章介绍的内容。
+</p>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+保存状态</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+要不来点猛的？在做之前，先为当前目录所有文件做个快照，使用：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git init
+$ git add .
+$ git commit -m "My first backup"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在如果你的编辑乱了套，恢复之前的版本：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git reset --hard
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+再次保存状态：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git commit -a -m "Another backup"
+</code></pre>
+
+
+ 
+
+ 
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+添加、删除、重命名</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+以上命令将只跟踪你第一次运行 git add 命令时就已经存在的文件。如果要添加新文 件或子目录，你需要告诉Git：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git add readme.txt Documentation
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+类似，如果你想让Git忘记某些文件：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git rm kludge.h obsolete.c
+$ git rm -r incriminating/evidence/
+</code></pre>
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这些文件如果还没删除，Git删除它们。
+
+重命名文件和先删除旧文件，再添加新文件的一样。也有一个快捷方式 git mv ，和 mv 命令的用法一样。例如：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git mv bug.c feature.c
+</code></pre>
+
+
+ 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+进阶撤销/重做</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+有时候你只想把某个时间点之后的所有改动都回滚掉，因为这些的改动是不正确的。那 么：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git log
+</code></pre>
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来显示最近提交列表，以及他们的SHA1哈希值:
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date: Tue Mar 14 01:59:26 2000 -0800
+
+Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date: Thu Jan 1 00:00:00 1970 +0000
+
+Initial commit.
+</code></pre>
+
+
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+哈希值的前几个字符足够确定一个提交；也可以拷贝粘贴完整的哈希值，键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git reset --hard 766f
+</code></pre>
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来恢复到一个指定的提交状态，并从记录里永久抹掉所有比该记录新一些的提交。
+
+另一些时候你想简单地跳到一个旧状态。这种情况，键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git checkout 82f5
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这个操作将把你带回过去，同时也保留较新提交。然而，像科幻电影里时光旅行一样， 如果你这时编辑并提交的话，你将身处另一个现实里，因为你的动作与开始时相比是不 同的。
+这另一个现实叫作“分支”（branch），之后 我们会对这点多讨论一些。 至于现在，只要记住：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git checkout master
+</code></pre>
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+会把你带到当下来就可以了。另外，为避免Git的抱怨，应该在每次运行checkout之前提 交（commit）或重置（reset）你的改动。
+还以电脑游戏作为类比：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+git reset --hard: 加载一个旧记录并删除所有比之新的记录。
+git checkout: 加载一个旧记录，但如果你在这个记录上玩，游戏状态将偏离第 
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一轮的较新状态。你现在打的所有游戏记录会在你刚进入的、代表另一个真实的分支 里。我们稍后论述。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你可以选择只恢复特定文件和目录，通过将其加在命令之后：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git checkout 82f5 some.file another.file
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+小心，这种形式的 checkout 会不声不响地覆盖文件。为阻止意外发生，在运行任何 checkout命令之前做提交，尤其在初学Git的时候。通常，任何时候你觉得对运行某个命 令不放心，无论Git命令还是不是Git命令，就先运行一下 git commit -a 。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+不喜欢拷贝站题哈希值？那就用：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git checkout :/"My first b"
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来跳到以特定字符串开头的提交。你也可以回到倒数第五个保存状态：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal"># 
+$ git checkout master~5
+</code></pre>
+
+
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+进阶撤销/重做</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+有时候你只想把某个时间点之后的所有改动都回滚掉，因为这些的改动是不正确的。那 么：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git log
+</code></pre>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+撤销</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在法庭上，事件可以从法庭记录里敲出来。同样，你可以检出特定提交以撤销。
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git commit -a
+$ git revert 1b6d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+讲撤销给定哈希值的提交。本撤销被记录为一个新的提交，你可以通过运行 git log 来确认这一点。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+变更日志生成</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一些项目要求生成变更日志changelog. 生 成一个，通过键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git log > ChangeLog
+</code></pre> 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+下载文件</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+得到一个由Git管理的项目的拷贝，通过键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone git://server/path/to/files
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+例如，得到我用来创建该站的所有文件：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone git://git.or.cz/gitmagic.git
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们很快会对 clone 命令谈的很多。
+</p>
+ 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+到最新</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果你已经使用 git clone 命令得到了一个项目的一份拷贝，你可以更新到最新版， 通过：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git pull
+</code></pre>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+快速发布</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+假设你写了一个脚本，想和他人分享。你可以只告诉他们从你的计算机下载，但如果此 时你正在改进你的脚本，或加入试验性质的改动，他们下载了你的脚本，他们可能由此 陷入困境。当然，这就是发布周期存在的原因。开发人员可能频繁进行项目修改，但他 们只在他们觉得代码可以见人的时候才择时发布。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+用Git来完成这项，需要进入你的脚本所在目录：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git init
+$ git add .
+$ git commit -m "First release"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+然后告诉你的用户去运行：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone your.computer:/path/to/script
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来下载你的脚本。这要假定他们有ssh访问权限。如果没有，需要运行 git daemon 并 告诉你的用户去运行：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone git://your.computer/path/to/script
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+从现在开始，每次你的脚本准备好发布时，就运行：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git commit -a -m "Next release"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+并且你的用户可以通过进入包含你脚本的目录，并键入下列命令，来更新他们的版本：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git pull
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你的用户永远也不会取到你不想让他们看到的脚本版本。显然这个技巧对所有的东西都 是可以，不仅是对脚本。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+我们已经做了什么？</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+找出自从上次提交之后你已经做了什么改变：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+或者自昨天的改变：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff "@{yesterday}"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+或者一个特定版本与倒数第二个变更之间：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff 1b6d "master~2"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+输出结果都是补丁格式，可以用 git apply 来把补丁打上。也可以试一下：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git whatchanged --since="2 weeks ago"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我也经常用qgit 浏览历史, 因为他的图形界 面很养眼，或者 tig ，一个文本界面的东西，很慢的网 络状况下也工作的很好。也可以安装web 服务器，运行 git instaweb ，就可以用任 何浏览器浏览了。
+</p> 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+<a target="_blank" target="_blank" name="wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" class="anchor" href="https://github.com/minixalpha/StrayBirds/blob/gh-pages/_posts/2014-01-26-wsgi-intro.md#wsgi-%E5%86%85%E5%AE%B9%E6%A6%82%E8%A6%81" style="color:rgb(65,131,196); text-decoration:none; display:block; padding-right:6px; padding-left:30px; margin-left:-30px; position:absolute; top:0px; left:0px; bottom:0px"></a>
+练习</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+比方A，B，C，D是四个连续的提交，其中B与A一样，除了一些文件删除了。我们想把这 些删除的文件加回D。我们如何做到这个呢？
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+至少有三个解决方案。假设我们在D：
+</p>
+ 
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+A与B的差别是那些删除的文件。我们可以创建一个补丁代表这些差别，然后吧补丁 打上：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff B A | git apply
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+既然这些文件存在A，我们可以把它们拿出来：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git checkout A foo.c bar.h
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们可以把从A到B的变化视为可撤销的变更：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git revert B
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+哪个选择最好？这取决于你的喜好。利用Git满足自己需求是容易，经常还有多个方法。
+</p>
+
+
+
+
+</div>
+    </div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
