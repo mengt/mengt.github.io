@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+git教程中文版:第三部分</h1>
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+第 6 章 多人Git</h1>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+目录</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我是谁？ Git在SSH, HTTP上 Git在随便什么上 补丁：全球货币 对不起，移走了 远端分支 多远端 我的喜好
+我最初在一个私人项目上使用Git，那里我是唯一的开发。在与Git分布式本性有关的命 令中，我只用到了 pull 和 *clone*，用以在不同地方保持同一个项目。
+
+后来我想用Git发布我的代码，并且包括其他贡献者的变更。我不得不学习如何管理有来 自世界各地的多个开发的项目，幸运的是，这是Git的长处，也可以说是其存在的理由。
+</p>
+
+
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+我是谁？
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+每个提交都有一个作者姓名和电子信箱，这显示在 git log 里。默认， Git使用系统 设定来填充这些域。要显示地设定，键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+去掉global选项设定只对当前仓库生效。
+</p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Git在SSH, HTTP上
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+假设你有ssh访问权限，以访问一个网页服务器，但上面并没有安装Git。尽管比着它的 原生协议效率低，Git也是可以通过HTTP来进行通信的。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+那么在你的帐户下，下载，编译并安装Git。在你的网页目录里创建一个Git仓库： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ GIT_DIR=proj.git git init
+$ cd proj.git
+$ git --bare update-server-info
+$ cp hooks/post-update.sample hooks/post-update
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对较老版本的Git，只拷贝还不够，你应运行： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ chmod a+x hooks/post-update
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在你可以通过SSH从随便哪个克隆发布你的最新版本： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git push web.server:/path/to/proj.git master
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+那随便谁都可以通过如下命令得到你的项目： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone http://web.server/proj.git
+ </code></pre>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Git在随便什么上
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+想无需服务器，甚至无需网络连接的时候同步仓库？需要在紧急时期凑合一下？我们 已经看过git fast-export 和 git fast-import 可以转换资源 库到一个单一文件以及转回来。 我们可以来来会会传送这些文件以传输git仓库， 通过任何媒介，但一个更有效率的工具是 git bundle 。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+发送者创建一个“文件包”： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git bundle create somefile HEAD</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+然后传输这个文件包， somefile ，给某个其他参与者：电子邮件，优盘，一个 xxd 打印品和一个OCR扫描仪，通过电话读字节，狼烟，等等。接收者通过键入如下命 令从文件包获取提交： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git pull somefile</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+接收者甚至可以在一个空仓库做这个。不考虑大小， somefile 可以包含整个原先 git仓库。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在较大的项目里，可以通过只打包其他仓库缺少的变更消除浪费。例如，假设提交 ‘`1b6d…’'是两个参与者共享的最近提交： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git bundle create somefile HEAD ^1b6d</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果做的频繁，人可能容易忘记刚发了哪个提交。帮助页面建议使用标签解决这个问题。 即，在你发了一个文件包后，键入： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git tag -f lastbundle HEAD</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+并创建较新文件包，使用： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git bundle create newbundle HEAD ^lastbundle</code></pre>
+ 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+补丁：全球货币
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+补丁是变更的文本形式，易于计算机理解，人也类似。补丁可以通吃。你可以给开发电 邮一个补丁，不用管他们用的什么版本控制系统。只要你的观众可以读电子邮件，他们 就能看到你的修改。类似，在你这边，你只需要一个电子邮件帐号：不必搭建一个在线 的Git仓库。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+回想一下第一章： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff 1b6d > my.patch</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+输出是一个补丁，可以粘贴到电子邮件里用以讨论。在一个Git仓库，键入： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git apply < my.patch</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来打这个补丁。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在更正式些的设置里，当作者名字以及或许签名应该记录下的时候，为过去某一刻生成 补丁，键入： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git format-patch 1b6d</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+结果文件可以给 git-send-email 发送，或者手工发送。你也可以指定一个提交范围： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git format-patch 1b6d..HEAD^^</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在接收一端，保存邮件到一个文件，然后键入： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git am < email.txt</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这就打了补丁并创建了一个提交，包含诸如作者之类的信息。
+
+使用浏览器邮件客户端，在保存补丁为文件之前，你可能需要建一个按钮，看看邮件内 容原来的原始形式。
+
+对基于mbox的邮件客户端有些微不同，但如果你在使用的话，你可能是那种能轻易找出 答案的那种人，不用读教程。
+ 
+ </p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+对不起，移走了
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+克隆一个仓库后，运行 git push 或 git pull 讲自动推到或从原先URL拉。Git 如何做这个呢？秘密在和克隆一起创建的配置选项。让我们看一下： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config --list
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+选项 remote.origin.url 控制URL源；“origin” 是给源仓库的昵称。和 “master” 分支的惯例一样，我们可以改变或删除这个昵称，但通常没有理由这么做。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果原先仓库移走，我们可以更新URL，通过： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config remote.origin.url git://new.url/proj.git
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+选项 branch.master.merge 指定 git pull 里的默认远端分支。在初始克隆的时候， 它被设为原仓库的当前分支，因此即使原仓库之后挪到一个不同的分支，后来的 pull也将忠实地跟着原来的分支。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这个选项只使用我们初次克隆的仓库，它的值记录在选项 branch.master.remote 。如果我们从其他仓库拉入，我们必须显示指定我们想要哪个分支： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git pull git://example.com/other.git master
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+以上也解释了为什么我们较早一些push和pull的例子没有参数。
+  </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+远端分支
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+当你克隆一个仓库，你也克隆了它的所有分支。你或许没有注意到因为Git将它们隐藏 起来了：你必须明确地要求。这使得远端仓库里的分支不至于干扰你的分支，也使 Git对初学者稍稍容易些。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+列出远端分支，使用： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git branch -r
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你应该看到类似： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+origin/HEAD
+origin/master
+origin/experimental
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这显示了远端仓库的分支和HEAD，可以用在常用的Git命令里。例如，假设你已经做了 很多提交，并希望和最后取到的版本比较一下。你可以搜索适当的SHA1哈希值，但使用 下面命令更容易些： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff origin/HEAD
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+或你可以看看‘`experimental’'分支都有啥： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git log origin/experimental
+ </code></pre>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+多远端
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+假设另两个开发在同一个项目上工作，我们希望保持两个标签。我们可以同事跟多个仓库： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git remote add other git://example.com/some_repo.git
+$ git pull other some_branch
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在我们已经从第二个仓库合并到一个分支，并且我们已容易访问所有仓库的所有 分支。 </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git diff origin/experimental^ other/some_branch~5
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+但如果为了不影响自己的工作，我们只想比较他们的变更怎么办呢？换句话说，我们想 检查一下他们的分支，又不使他们的变更入侵我们的工作目录。那不是运行pull命令， 而是运行： </p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git fetch # Fetch from origin, the default.
+$ git fetch other # Fetch from the second programmer.
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这只是获取历史。尽管工作目录维持不变，我们可以参考任何仓库的任何分支，使用 一个Git命令，因为我们现在有一个本地拷贝。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+回想一下，在幕后，一个pull是简单地一个 fetch 然后 merge 。通常，我们 pull 因为我们想在获取后合并最近提交；这个情况是一个值得注意的例外。 </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+关于如何去除远端仓库，如何忽略特定分支等更多，参见 git help remote 。
+  </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+我的喜好
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对我手头的项目，我喜欢贡献者去准备仓库，这样我可以从其中拉。一些Git伺服让你 点一个按钮，拥有自己的分叉项目。
+
+在我获取一个树之后，我运行Git命令去浏览并检查这些变更，理想情况下这些变更组织 良好，描述良好。我合并这些变更，也或许做些编辑。直到满意，我才把变更推入主资 源库。
+
+尽管我不经常收到贡献，我相信这个方法扩展性良好。参见 这篇 来自Linus Torvalds的博客
+
+呆在Git的世界里比补丁文件稍更方便，因为不用我将补丁转换到Git提交。更进一步， Git处理诸如作者姓名和信箱地址的细节，还有时间和日期，以及要求作者描述他们的提 交。
+ </p>
+
+ 
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+
+第 7 章 Git大师技
+ </h1>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+目录
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+源码发布 提交变更 我的提交太大了！ 索引：Git的中转区域 别丢了你的HEAD HEAD捕猎 基于Git构建 大胆的特技 阻止坏提交
+到现在，你应该有能力查阅 git help 页，并理解几乎所有东西。然而，查明解决特 定问题需要的确切命令可能是乏味的。或许我可以省你点功夫：以下是我过去曾经需要 的一些食谱。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+源码发布
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+就我的项目而言，Git完全跟踪了我想打包并发布给用户的文件。创建一个源码包，我运 行：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+</code></pre> 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+提交变更
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对特定项目而言，告诉Git你增加，删除和重命名了一些文件很麻烦。而键入如下命令会容易的多：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git add .
+$ git add -u
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git将查找当前目录的文件并自己算出具体的情况。除了用第二个add命令，如果你也打 算这时提交，可以运行`git commit -a`。关于如何指定应被忽略的文件，参见 git help ignore 。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你也可以用一行命令完成以上任务：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这里 -z 和 -0 选项可以消除包含特殊字符的文件名引起的不良副作用。注意这个 命令也添加应被忽略的文件，这时你可能需要加上 -x 或 -X 选项。</p>
+ 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+我的提交太大了！
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+是不是忽视提交太久了？痴迷地编码，直到现在才想起有源码控制工具这回事？提交一 系列不相关的变更，因为那是你的风格？</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+别担心，运行：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git add -p
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+为你做的每次修改，Git将展示给你变动的代码，并询问该变动是否应是下一次提交的一 部分。回答“y”或者“n”。也有其他选项，比如延迟决定；键入“？”来学习更多。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一旦你满意，键入</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git commit
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+来精确地提交你所选择的变更（阶段变更）。确信你没加上 -a 选项，否则Git将提交 所有修改。
+
+如果你修改了许多地方的许多文件怎么办？一个一个地查看变更令人沮丧，心态麻木。 这种情况下，使用 git add -i ， 它的界面不是很直观，但更灵活。敲几个键，你可 以一次决定阶段或非阶段性提交几个文件，或查看并只选择特定文件的变更。作为另一 种选择，你还可以运行 git commit --interactive ，这个命令会在你操作完后自动 进行提交。
+ 
+</p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+索引：Git的中转区域
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+当目前为止，我们已经忽略Git著名的'索引‘概念，但现在我们必须面对它，以解释上 面发生的。索引是一个临时中转区。Git很少在你的项目和它的历史之间直接倒腾数据。 通常，Git先写数据到索引，然后拷贝索引中的数据到最终目的地。
+
+例如， commit -a 实际上是一个两步过程。第一步把每个追踪文件当前状态的快照放 到索引中。第二步永久记录索引中的快照。 没有 -a 的提交只执行第二步，并且只在 运行不知何故改变索引的命令才有意义，比如 git add 。
+
+通常我们可以忽略索引并假装从历史中直接读并直接写。在这个情况下，我们希望更好 地控制，因此我们操作索引。我们放我们变更的一些的快照到索引中，而不是所有的， 然后永久地记录这个小心操纵的快照。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+别丢了你的HEAD
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+HEAD好似一个游标，通常指向最新提交，随最新提交向前移动。一些Git命令让你来移动 它。 例如：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git reset HEAD~3
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+将立即向回移动HEAD三个提交。这样所有Git命令都表现得好似你没有做那最后三个提交， 然而你的文件保持在现在的状态。具体应用参见帮助页。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+但如何回到将来呢？过去的提交对将来一无所知。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果你有原先Head的SHA1值，那么：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git reset 1b6d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+但假设你从来没有记下呢？别担心，像这些命令，Git保存原先的Head为一个叫 ORGI_HEAD的标记，你可以安全体面的返回：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git reset ORIG_HEAD
+ 
+</code></pre>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+HEAD捕猎
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">或许ORG_HEAD不够。或许你刚认识到你犯了个历史性的错误，你需要回到一个早已忘记 分支上一个远古的提交。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+默认，Git保存一个提交至少两星期，即使你命令Git摧毁该提交所在的分支。难点是找 到相应的哈希值。你可以查看在.git/objects里所有的哈希值并尝试找到你期望的。但 有一个更容易的办法。
+
+Git把算出的提交哈希值记录在“.git/logs”。这个子目录引用包括所有分支上所有活 动的历史，同时文件HEAD显示它曾经有过的所有哈希值。后者可用来发现分支上一些不 小心丢掉提交的哈希值。
+
+The reflog command provides a friendly interface to these log files. Try
+
+命令reflog为访问这些日志文件提供友好的接口，试试</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git reflog
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+而不是从reflog拷贝粘贴哈希值，试一下：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git checkout "@{10 minutes ago}"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+或者捡出后五次访问过的提交，通过：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git checkout "@{5}"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+更多内容参见 git help rev-parse 的‘`Specifying Revisions’'部分。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你或许期望去为已删除的提交设置一个更长的保存周期。例如：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config gc.pruneexpire "30 days"
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+意思是一个被删除的提交会在删除30天后，且运行 git gc 以后，被永久丢弃。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你或许还想关掉 git gc 的自动运行：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config gc.auto 0
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在这种情况下提交将只在你手工运行 git gc 的情况下才永久删除。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+基于Git构建
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+依照真正的UNIX风格设计，Git允许其易于用作其他程序的底层组件，比如图形界面， Web界面，可选择的命令行界面，补丁管理工具，导入和转换工具等等。实际上，一些 Git命令它们自己就是站在巨人肩膀上的脚本。通过一点修补，你可以定制Git适应你的 偏好。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一个简单的技巧是，用Git内建alias命令来缩短你最常使用命令：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git config --global alias.co checkout
+$ git config --global --get-regexp alias # 显示当前别名
+alias.co checkout
+$ git co foo # 和“git checkout foo”一样
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+另一个技巧，在提示符或窗口标题上打印当前分支。调用：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git symbolic-ref HEAD
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+显示当前分支名。在实际应用中，你可能最想去掉“refs/heads/”并忽略错误：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+子目录 contrib 是一个基于Git工具的宝库。它们中的一些时时会被提升为官方命令。 在Debian和Ubuntu，这个目录位于 /usr/share/doc/git-core/contrib 。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一个受欢迎的居民是 workdir/git-new-workdir 。通过聪明的符号链接，这个脚本创 建一个新的工作目录，其历史与原来的仓库共享：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git-new-workdir an/existing/repo new/directory
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这个新的目录和其中的文件可被视为一个克隆，除了既然历史是共享的，两者的树自动 保持同步。不必合并，推入或拉出。
+ 
+</p>
+ 
+
+
+
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+大胆的特技
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这些天，Git使得用户意外摧毁数据变得更困难。但如若你知道你在做什么，你可以突破 为通用命令所设的防卫保障。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+*Checkout*：未提交的变更会导致捡出失败。销毁你的变更，并无论如何都checkout一 个指定的提交，使用强制标记：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git checkout -f HEAD^
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+另外，如果你为捡出指定特别路径，那就没有安全检查了。提供的路径将被不加提示地 覆盖。如你使用这种方式的检出，要小心。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Reset: 如有未提交变更重置也会失败。强制其通过，运行：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git reset --hard 1b6d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Branch: 引起变更丢失的分支删除会失败。强制删除，键入：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git branch -D dead_branch # instead of -d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+类似，通过移动试图覆盖分支，如果随之而来有数据丢失，也会失败。强制移动分支，键入：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git branch -M source target # 而不是 -m
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+不像checkout和重置，这两个命令延迟数据销毁。这个变更仍然存储在.git的子目录里， 并且可以通过恢复.git/logs里的相应哈希值获取（参见上面 上面“HEAD猎捕”）。默 认情况下，这些数据会保存至少两星期。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Clean: 一些Git命令拒绝执行，因为它们担心会重装未纳入管理的文件。如果你确信 所有未纳入管理的文件都是消耗，那就无情地删除它们，使用：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clean -f -d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+下次，那个讨厌的命令就会工作！
+ 
+</p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+阻止坏提交
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+愚蠢的错误污染我的仓库。最可怕的是由于忘记 git add 而引起的文件丢失。较小 的罪过是行末追加空格并引起合并冲突：尽管危害少，我希望浙西永远不要出现在公开 记录里。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+不过我购买了傻瓜保险，通过使用一个_钩子_来提醒我这些问题：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ cd .git/hooks
+$ cp pre-commit.sample pre-commit # 对旧版本Git，先运行chmod +x
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在Git放弃提交，如果检测到无用的空格或未解决的合并冲突。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对本文档，我最终添加以下到 pre-commit 钩子的前面，来防止缺魂儿的事：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+if git ls-files -o | grep '.txt$'; then
+echo FAIL! Untracked .txt files.
+exit 1
+fi
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+几个git操作支持钩子；参见 git help hooks 。我们早先激活了作为例子的 post-update 钩子，当讨论基于HTTP的Git的时候。无论head何时移动，这个钩子都会 运行。例子脚本post-update更新Git在基于Git并不知晓的传输协议，诸如HTTP，通讯时 所需的文件。
+ </p>
+
+ 
+
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+第 8 章 揭开面纱
+</h1> 
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+目录
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+大象无形 数据完整性 智能 索引 Git的源起 对象数据库 Blob对象 Tree对象 Commit对象 没那么神
+我们揭开Git神秘面纱，往里瞧瞧它是如何创造奇迹的。我会跳过细节。更深入的描述参 见 用户手 册。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+大象无形
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git怎么这么谦逊寡言呢？除了偶尔提交和合并外，你可以如常工作，就像不知道版本控 制系统存在一样。那就是，直到你需要它的时候，而且那是你欢欣的时候，Git一直默默 注视着你。
+
+其他版本控制系统强迫你与繁文缛节和官僚主义不断斗争。文件的权限可能是只读的， 除非你显式地告诉中心服务器哪些文件你打算编辑。即使最基本的命令，随着用户数目 的增多，也会慢的像爬一样。中心服务器可能正跟踪什么人，什么时候check out了什么 代码。当网络连接断了的时候，你就遭殃了。开发人员不断地与这些版本控制系统的种 种限制作斗争。一旦网络或中心服务器瘫痪，工作就嘎然而止。
+
+与之相反，Git简单地在你工作目录下的.git`目录保存你项目的历史。这是你自己的历 史拷贝，因此你可以保持离线，直到你想和他人沟通为止。你拥有你的文件命运完全的 控制权，因为Git可以轻易在任何时候从.git`重建一个保存状态。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+数据完整性
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+很多人把加密和保持信息机密关联起来，但一个同等重要的目标是保证信息安全。合理 使用哈希加密功能可以防止无意或有意的数据损坏行为。
+
+一个SHA1哈希值可被认为是一个唯一的160位ID数，用它可以唯一标识你一生中遇到的每 个字节串。 实际上不止如此：每个字节串可供任何人用好多辈子。
+
+对一个文件而言，其整体内容的哈希值可以被看作这个文件的唯一标识ID数。
+
+因为一个SHA1哈希值本身也是一个字节串，我们可以哈希包括其他哈希值的字节串。这 个简单的观察出奇地有用：查看“哈希链”。我们之后会看Git如何利用这一点来高效地 保证数据完整性。
+
+简言之，Git把你数据保存在`.git/objects`子目录，那里看不到正常文件名，相反你只 看到ID。通过用ID作为文件名，加上一些文件锁和时间戳技巧，Git把任意一个原始的文 件系统转化为一个高效而稳定的数据库。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+智能
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git是如何知道你重命名了一个文件，即使你从来没有明确提及这个事实？当然，你或许 是运行了 git mv ，但这个命令和 git add 紧接 git rm 是完全一样的。
+
+Git启发式地找出相连版本之间的重命名和拷贝。实际上，它能检测文件之间代码块的移 动或拷贝！尽管它不能覆盖所有的情况，但它已经做的很好了，并且这个功能也总在改 进中。如果它在你那儿不工作的话，可以尝试打开开销更高的拷贝检测选项，并考虑升 级。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+索引
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+为每个加入管理的文件，Git在一个名为“index”的文件里记录统计信息，诸如大小， 创建时间和最后修改时间。为了确定文件是否更改，Git比较其当前统计信息与那些在索 引里的统计信息。如果一致，那Git就跳过重新读文件。
+
+因为统计信息的调用比读文件内容快的很多，如果你仅仅编辑了少数几个文件，Git几乎 不需要什么时间就能更新他们的统计信息。
+
+我们前面讲过索引是一个中转区。为什么一堆文件的统计数据是一个中转区？因为添加 命令将文件放到Git的数据库并更新它们的统计信息，而无参数的提交命令创建一个提交， 只基于这些统计信息和已经在数据库里的文件。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Git的源起
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这个 Linux内核邮件列表帖子 描述了导致Git 的一系列事件。整个讨论线索是一个令人着迷的历史探究过程，对Git史学家而言。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+对象数据库
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你数据的每个版本都保存在“对象数据库”里，其位于子目录.git/objects`；其他位 于.git/`的较少数据：索引，分支名，标签，配置选项，日志，头提交的当前位置等。 对象数据库朴素而优雅，是Git的力量之源。
+
+`.git/objects`里的每个文件是一个对象。有3中对象跟我们有关：“blob”对象， “tree”对象，和“commit”对象。
+ 
+</p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Blob对象
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+首先来一个小把戏。去一个文件名，任意文件名。在一个空目录：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ echo sweet > YOUR_FILENAME
+$ git init
+$ git add .
+$ find .git/objects -type f
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你将看到 .git/objects/aa/823728ea7d592acc69b36875a482cdf3fd5c8d 。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我如何在不知道文件名的情况下知道这个？这是因为以下内容的SHA1哈希值：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+"blob" SP "6" NUL "sweet" LF
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+是 aa823728ea7d592acc69b36875a482cdf3fd5c8d，这里SP是一个空格，NUL是一个0字节， LF是一个换行符。你可以验证这一点，键入：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ printf "blob 600sweetn" | sha1sum
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git基于“内容寻址”：文件并不按它们的文件名存储，而是按它们包含内容的哈希值， 在一个叫“blob对象”的文件里。我们可以把文件内容的哈希值看作一个唯一ID，这样 在某种意义上我们通过他们内容放置文件。开始的“blob 6”只是一个包含对象类型与 其长度的头；它简化了内部存储。
+
+这样我可以轻易语言你所看到的。文件名是无关的：只有里面的内容被用作构建blob对象。
+
+你可能想知道对相同的文件什么会发生。试图加一个你文件的拷贝，什么文件名都行。 在 .git/objects 的内容保持不变，不管你加了多少。Git只存储一次数据。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+顺便说一句，在 .git/objects 里的文件用zlib压缩，因此你不应该直接查看他们。 可以通过zpipe -d 管道， 或者键入：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git cat-file -p aa823728ea7d592acc69b36875a482cdf3fd5c8d
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这漂亮地打印出给定的对象。
+ </p>
+
+
+
+
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Tree对象
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+但文件名在哪？它们必定在某个阶段保存在某个地方。Git在提交时得到文件名：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git commit # 输入一些信息。
+$ find .git/objects -type f</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你应看到3个对象。这次我不能告诉你这两个新文件是什么，因为它部分依赖你选择的文 件名。我继续进行，假设你选了‘`rose’'。如果你没有，你可以重写历史以让它看起来 像似你做了：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git filter-branch --tree-filter 'mv YOUR_FILENAME rose'
+$ find .git/objects -type f</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+现在你硬看到文件 .git/objects/05/b217bb859794d08bb9e4f7f04cbda4b207fbe9 ，因为这是以下内容的SHA1哈希值：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+"tree" SP "32" NUL "100644 rose" NUL 0xaa823728ea7d592acc69b36875a482cdf3fd5c8d</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+检查这个文件真的包含上面内容通过键入：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ echo 05b217bb859794d08bb9e4f7f04cbda4b207fbe9 | git cat-file --batch</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+使用zpipe，验证哈希值是容易的：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ zpipe -d < .git/objects/05/b217bb859794d08bb9e4f7f04cbda4b207fbe9 | sha1sum
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+与查看文件相比，哈希值验证更技巧一些，因为其输出不止包含原始未压缩文件。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+这个文件是一个“tree”对象：一组数据包含文件类型，文件名和哈希值。在我们的例 子里，文件类型是100644，这意味着“rose”是一个一般文件，并且哈希值指blob对象， 包含“rose”的内容。其他可能文件类型有可执行，链接或者目录。在最后一个例子里， 哈希值指向一个tree对象。</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在一些过渡性的分支，你会有一些你不在需要的老的对象，尽管有宽限过期之后，它们 会被自动清除，现在我们还是将其删除，以使我们比较容易跟上这个玩具例子。</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ rm -r .git/refs/original
+$ git reflog expire --expire=now --all
+$ git prune
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+在真实项目里你通常应该避免像这样的命令，因为你在破换备份。如果你期望一个干净 的仓库，通常最好做一个新的克隆。还有，直接操作 .git 时一定要小心：如果 Git命令同时也在运行会怎样，或者突然停电？一般，引用应由 git update-ref -d 删除，尽管通常手工删除 refs/original 也是安全的。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Commit对象
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们已经解释了三个对象中的两个。第三个是“commit”对象。其内容依赖于提交信息 以及其创建的日期和时间。为满足这里我们所有的，我们不得不调整一下：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git commit --amend -m Shakespeare # 改提交信息
+$ git filter-branch --env-filter 'export
+GIT_AUTHOR_DATE="Fri 13 Feb 2009 15:31:30 -0800"
+GIT_AUTHOR_NAME="Alice"
+GIT_AUTHOR_EMAIL="alice@example.com"
+GIT_COMMITTER_DATE="Fri, 13 Feb 2009 15:31:30 -0800"
+GIT_COMMITTER_NAME="Bob"
+GIT_COMMITTER_EMAIL="bob@example.com"' # Rig timestamps and authors.
+$ find .git/objects -type f</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你现在应看到 .git/objects/49/993fe130c4b3bf24857a15d7969c396b7bc187 是下列 内容的SHA1哈希值：
+ </p>
+ <pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+"commit 158" NUL
+"tree 05b217bb859794d08bb9e4f7f04cbda4b207fbe9" LF
+"author Alice <alice@example.com> 1234567890 -0800" LF
+"committer Bob <bob@example.com> 1234567890 -0800" LF
+LF
+"Shakespeare" LF</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+和前面一样，你可以运行zpipe或者cat-file来自己看。
+
+这是第一个提交，因此没有父提交，但之后的提交将总有至少一行，指定一个父提交。
+ </p>
+
+ 
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+
+没那么神
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git的秘密似乎太简单。看起来似乎你可以整合几个shell脚本，加几行C代码来弄起来， 也就几个小时的事：一个基本文件操作和SHA1哈希化的混杂，用锁文件装饰一下，文件 同步保证健壮性。实际上，这准确描述了Git的最早期版本。尽管如此，除了巧妙地打包 以节省空间，巧妙地索引以省时间，我们现在知道Git如何灵巧地改造文件系统成为一个 对版本控制完美的数据库。
+
+例如，如果对象数据库里的任何一个文件由于硬盘错误损毁，那么其哈希值将不再匹配， 这个错误会报告给我们。通过哈希化其他对象的哈希值，我们在所有层面维护数据完整 性。Commit对象是原子的，也就是说，一个提交永远不会部分地记录变更：在我们已经 存储所有相关tree对象，blob对象和父commit对象之后，我们才可以计算提交的的哈希 值并将其存储在数据库，对象数据库不受诸如停电之类的意外中断影响。
+
+我们打败即使是最狡猾的对手。假设有谁试图悄悄修改一个项目里一个远古版本文件的 内容。为使对象据库看起来健康，他们也必须修改相应blob对象的哈希值，既然它现在 是一个不同的字节串。这意味着他们讲不得不引用这个文件的tree对象的哈希值，并反 过来改变所有与这个tree相关的commit对象的哈希值，还要加上这些提交所有后裔的哈 希值。这暗示官方head的哈希值与这个坏仓库不同。通过跟踪不匹配哈希值线索，我 们可以查明残缺文件，以及第一个被破坏的提交。
+
+总之，只要20个字节代表最后一次提交的是安全的，不可能篡改一个Git仓库。
+
+那么Git的著名功能怎样呢？分支？合并？标签？单纯的细节。当前head保存在文件 .git /HEAD ，其中包含了一个commit对象的哈希值。该哈希值在运行提交以及其他命 令是更新。分支几乎一样：它们是保存在 .git/refs/heads 的文件。标签也是：它们 住在住在 .git/refs/tags ，但它们由一套不同的命令更新。
+</p> 
+
+ 
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+
+第 9 章 附录 A: Git的缺点
+</h1>
+ <h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+
+目录
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+SHA1 的弱点 微软 Windows 不相关的文件 谁在编辑什么？ 文件历史 初始克隆 不稳定的项目 全局计数器 空子目录 初始提交 接口怪癖
+有一些Git的问题，我已经藏在毯子下面了。有些可以通过脚本或回调方法轻易地解决， 有些需要重组或重定义项目，少数剩下的烦恼，还只能等待。或者更好地，投入进来帮 忙。
+</p> 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+SHA1 的弱点
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+随着时间的推移，密码学家发现越来越多的SHA1的弱点。已经发现对对资源雄厚的组织 哈希冲撞是可能的。在几年内，或许甚至一个一般的PC也将有足够计算能力悄悄摧毁一 个Git仓库。
+
+希望在进一步研究摧毁SHA1之前，Git能迁移到一个更好的哈希算法。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+微软 Windows
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Git在微软Windows上可能有些繁琐：
+
+Cygwin ，, 一个Windows下的类Linux的环境，包含一个 一个Git在Windows下的移植.
+基于MSys的Git 是另一个，要求最小运行时支持，不过一些命令不能马上工作。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+不相关的文件
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果你的项目非常大，包含很多不相关的文件，而且正在不断改变，Git可能比其他系统 更不管用，因为独立的文件是不被跟踪的。Git跟踪整个项目的变更，这通常才是有益的。
+
+一个方案是将你的项目拆成小块，每个都由相关文件组成。如果你仍然希望在同一个资 源库里保存所有内容的话，可以使用 git submodule 。
+</p> 
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+谁在编辑什么？
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一些版本控制系统在编辑前强迫你显示地用某个方法标记一个文件。尽管这种要求很烦 人，尤其是需要和中心服务器通讯时，不过它还是有以下两个好处的：
+
+比较速度快，因为只有被标记的文件需要检查。
+可以知道谁在这个文件上工作，通过查询在中心服务器谁把这个文件标记为编辑状 态。
+
+使用适当的脚本，你也可以使Git达到同样的效果。这要求程序员协同工作，当他编辑一 个文件的时候还要运行特定的脚本。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+文件历史
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+因为Git记录的是项目范围的变更，重造单一文件的变更历史比其他跟踪单一文件的版本 控制系统要稍微麻烦些。
+
+好在麻烦还不大，也是值得的，因为Git其他的操作难以置信地高效。例如，`git checkout`比`cp -a`都快，而且项目范围的delta压缩也比基于文件的delta集合的做法 好多了。
+ 
+</p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+初始克隆
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the --depth option. This is much faster, but the resulting clone has reduced functionality.
+
+当一个项目历史很长后，与在其他版本系统里的检出代码相比，创建一个克隆的开销会 大的多。
+
+长远来看，开始付出的代价还是值得付出的，因为大多将来的操作将由此变得很快，并 可以离线完成。然而，在一些情况下，使用`--depth`创建一个浅克隆比较划算些。这种 克隆初始化的更快，但得到克隆的功能有所削减。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+不稳定的项目
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+变更的大小决定写入的速度快慢是Git的设计。一般人做了小的改动就会提交新版本。这 里一行臭虫修改，那里一个新功能，修改掉的注释等等。但如果你的文件在相邻版本之 间存在极大的差异，那每次提交时，你的历史记录会以整个项目的大小增长。
+
+任何版本控制系统对此都束手无策，但标准的Git用户将遭受更多，因为一般来说，历史 记录也会被克隆。
+
+应该检查一下变更巨大的原因。或许文件格式需要改变一下。小修改应该仅仅导致几个 文件的细小改动。
+
+或许，数据库或备份/打包方案才是正选，而不是版本控制系统。例如，版本控制就不适 宜用来管理网络摄像头周期性拍下的照片。
+
+如果这些文件实在需要不断更改，他们实在需要版本控制，一个可能的办法是以中心的 方式使用Git。可以创建浅克隆，这样检出的较少，也没有项目的历史记录。当然，很多 Git工具就不能用了，并且修复必须以补丁的形式提交。这也许还不错，因为似乎没人需 要大幅度变化的不稳定文件历史。
+
+另一个例子是基于固件的项目，使用巨大的二进制文件形式。用户对固件文件的变化历 史没有兴趣，更新的压缩比很低，因此固件修订将使仓库无谓的变大。
+
+这种情况，源码应该保存在一个Git仓库里，二进制文件应该单独保存。为了简化问题， 应该发布一个脚本，使用Git克隆源码，对固件只做同步或Git浅克隆。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+全局计数器
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+一些中心版本控制系统维护一个正整数，当一个新提交被接受的时候这个整数就增长。Git则是通过哈希值来记录所有变更，这在大多数情况下都工作的不错。
+
+但一些人喜欢使用整数的方法。幸运的是，很容易就可以写个脚本，这样每次更新，中心Git仓库就增大这个整数，或使用tag的方式，把最新提交的哈希值与这个整数关联起来。
+
+每个克隆都可以维护这么个计数器，但这或许没什么用，因为只有中心仓库以及它的计数器对每个人才有意义。
+ 
+</p>
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+空子目录
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+空子目录不可加入管理。可以通过创建一个空文件以绕过这个问题。
+
+Git的当前实现，而不是它的设计，是造成这个缺陷的原因。如果运气好，一旦Git得到 更多关注，更多用户要求这个功能，这个功能就会被实现。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+初始提交
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+传统的计算机系统从0计数，而不是1。不幸的是，关于提交，Git并不遵从这一约定。很 多命令在初始提交之前都不友好。另外，一些极少数的情况必须作特别地处理。例如重 订一个使用不同初始提交的分支。
+
+Git将从定义零提交中受益：一旦一个仓库被创建起来，HEAD将被设为包含20个零字节 的字符串。这个特别的提交代表一棵空的树，没有父节点，早于所有Git仓库。
+
+然后运行git log，比如，通知用户至今还没有提交过变更，而不是报告致命错误并退出。 这与其他工具类似。
+
+每个初始提交都隐式地成为这个零提交的后代。
+
+不幸的是还有更糟糕的情况。如果把几个具有不同初始提交的分支合并到一起，之后的 重新修订不可避免的需要人员的介入。
+ </p>
+
+ 
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+接口怪癖
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对提交A和提交B，表达式“A..B”和“A…B”的含义，取决于命令期望两个终点还是一 个范围。参见 git help diff 和 git help rev-parse 。
+ </p>
+
+ 
+
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+第 10 章 附录 B: 本指南的翻译
+</h1>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我推荐如下步骤翻译本指南，这样我的脚本就可以快速生成HTML和PDF版本，并且所有翻 译也可以共存于同一个仓库。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+克隆源码，然后针对不同目标 语言的IETF tag创建 一个目录。参见 W3C在 国际化方面的文章 。例如，英语是“en”，日语是“ja”，正体中文是“zh-Hant”。 然后在新建目录，翻译这些来自“en”目录的 txt 文件。
+ </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+例如，将本指南译为 克林贡语 ， 你也许键入：
+ </p>
+ <pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ git clone git://repo.or.cz/gitmagic.git
+$ cd gitmagic
+$ mkdir tlh # "tlh" 是克林贡语的IETF语言码。
+$ cd tlh
+$ cp ../en/intro.txt .
+$ edit intro.txt # 翻译这个文件
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+对每个文件都一样。
+ </p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+打开Makefile文件，把语言码加入`TRANSLATIONS`变量，现在你可以时不时查看你的工 作：
+ </p>
+ <pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+$ make tlh
+$ firefox book-tlh/index.html
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+经常提交你的变更，然后然我知道他们什么时候完成。GitHub.com提供一个便于fork “gitmatic”项目的界面，提交你的变更，然后告诉我去合并。
+
+但请按照最适合你的方式做：例如，中文译者就使用 Google Docs。只要你的工作使更多人看到我的工作，我就高兴。
+ </p>
+</div>
+    </div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
