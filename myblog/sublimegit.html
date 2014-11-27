@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Sublime下的Git部署与使用</h1>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+Error ALL,因公司网络问题，我的github上的东西拽不下来也上传不上东西，因此，只能在线编辑，没有图片，还请见谅。
+</p>
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+git部署：</h2>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们上一篇文章已经讲述了git的使用方法，虽然说sublime的功能很强大，但是什么都不是完美的，git方面很多地方功能不是特别完善，所以我们上篇文章至关重要，因为大部门功能还是需要git bash来完成，如：创建/删除仓库，克隆仓库，回滚/撤销提交事件等，submile只是一个编辑器，我们不要把所有希望都寄予它，如果没有阅读上篇文章请点击：
+<a target="_blank" target="_blank" class="anchor" href="http://mengt.github.io/myblog/gitlab.html" style="color:rgb(65,131,196); text-decoration:none; display:block;">Esage Gitlab</a>进行阅读。</br>
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们使用Package Control组件进行安装git插件，打开install package控制台后，直接输入git就可以看到。</br>
+这个时候Sublime Text只是安装了git插件，但还不能使用git命令，需要在修改Sublimt Text针对git的配置文件 “Git.sublime-settings”，这个文件一般在你的sublime的菜单栏preferences下的package-settings中的git settings-user</br>
+在这个文件中加入如下内容:
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+{
+  // if present, use this command instead of plain "git"
+  // e.g. "/Users/kemayo/bin/git" or "C:\bin\git.exe"
+  "git_command": "G:\Git\cmd\git.exe"
+}
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+"git_command": "G:\Git\cmd\git.exe"指向的是你的git程序中的git.exe文件</br>
+到此为止，sublime上的git配置完成。
+</p>
+
+<h2 style="margin:1em 0px 15px; line-height:1.7; font-size:2em; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(238,238,238); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+sublime(ST)使用：
+</h2>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+首先在Sublime text 打开想要使用git同步的项目目录，我的是“D:\Workspace\git\SublimeGitTest”。</br>
+如果没有git同步的项目，请参照<a target="_blank" target="_blank" class="anchor" href="http://mengt.github.io/myblog/gitlab.html" style="color:rgb(65,131,196); text-decoration:none; display:block;">Esage Gitlab</a>，因为在sublime上git没有remote和clone命令不能进行同步，需要git bash来辅助。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果你是一个新的项目，请使用“Ctrl+Shift+p”打开命令窗口，输入“Git:init”来初始化git化境。 ST会让你选择需要初始化的Git目录，选择到你的工程目录即可。之后就可以正常的使用git命令了。
+</p>
+
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+你可以使用Git:status来查看当前的状态。如果没有变动，ST无动作。
+</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们打开一个文件，进行修改，例如我们在README文件添加了“####sublime add ”,可以使用“Ctrl+Shift+p”打开命令窗口，输入“git diff”来查看修改:
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+git diff
+    diff --git a/README b/README
+    index 0a2c46f..8e3c707 100644
+    --- a/README
+    +++ b/README
+    @@ -5,4 +5,5 @@ you want
+     git rm --cached <added_file_to_undo>
+     fit reset.
+     git status
+    -####sublime add 
+    \ No newline at end of file
+    +####sublime add 
+    +####
+    \ No newline at end of file
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+修改了文件，接下来是用git:add命令添加新增加的文件：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+git add
+    + ALL FILES
+    including untracked files
+
+    +ALL FILES
+    apart from untracked files
+
+    ？？README.md
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+如果你的“README.md”文件是新添加的，选择“including untracked files”，将新增加的README.md添加到更改当中。</br>
+如果你的“README.md”文件是原有的，就选择“?？？README.md ”,将修改添加到git缓存中。
+</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+"add"修改了文件，接下来是用git:commit命令添加新增加的文件：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+git commit
+
+      [ -m 你的提交注释]
+      # sublime add
+      # one
+      # --------------
+      # Please enter the commit message for your changes. Everything below
+      # this paragraph is ignored, and an empty message aborts the commit.
+      # Just close the window to accept your message.
+      diff --git a/README b/README
+      index 0a2c46f..8e3c707 100644
+      --- a/README
+      +++ b/README
+      @@ -5,4 +5,5 @@ you want
+       git rm --cached <added_file_to_undo>
+       fit reset.
+       git status
+      -####sublime add 
+      \ No newline at end of file
+      +####sublime add 
+      +####
+      \ No newline at end of file
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+使用git:commit，来提交更改。Sublime Text会自动跳出一个文本文件，你可以在文件的最上方输入这次更改的comments，然后直接关闭这个文件，就会出发commit操作。并且将你输入的comments座位-m的参数。 这个是非常方便的，比用命令行运行commit 用-m参数添加评论的方式要方便很多，而且可以随便修改。ctrl+w关闭文件的同时，commit操作自动触发。
+</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+理论上接下来的步骤应该是添加远程仓库(remote repository)，而在Sublime Text中我始终没有找到这条命令，所以说我们要用git bash来执行。创建的一个同名的repository.
+</br>
+为了方便我们使用ST的时候直接打开一个仓库是最好的，步骤没有那么繁琐。
+</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们用git bash创建了仓库，然后回到Sublime Text，就可以使用Git:push命令来上传代码。</br>
+如果我们直接打开的git仓库就可以直接使用"git push"命令了。</br>
+但是奇怪的事情发生了，出现了错误:
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+git push
+      fatal: No configured push destination.
+      Either specify the URL from the command-line or configure a remote repository using
+
+          git remote add <name> <url>
+
+      and then push using the remote name
+
+          git push <name>
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+查了查，应该是没有设置宿主（master），但是ST git又不支持添加参数，所以还是只能回到git bash执行push命令。
+</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+查了查，应该是没有设置宿主（master），但是ST git又不支持添加参数，所以还是只能回到git bash执行push命令。
+</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+然后对文件再进行修改，再次尝试从ST，进行push。从add到commit到push，没有任何问题，竟然push成功了</br>
+原因是git bash上push一下git 已经记录了：
+</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+[
+fatal: No configured push destination.
+      Either specify the URL from the command-line or configure a remote repository using
+
+          git remote add <name> <url>
+
+      and then push using the remote name
+
+          git push <name>
+]
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+所以在此提交，就OK，到此为止ST上的git就完成了。
+</p>
+
+</div>
+    </div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
