@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+<div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+Python 中使用 sched 严格控制程序运行时间间隔</h1>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+由于我们在监控的过程中需要采集样本点，故我们设定的两次采样点的时间间隔是需要严格控制的，不能因为机器上的其他任务调度原因延迟我们的采样时间准确性。</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+原有的运行一次程序之后sleep一段时间再运行一次的方式不够准确，本文介绍使用python中的sched严格控制执行时间
+定时执行程序</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+我们所介绍的方式是在特定的时间执行程序，下面以程序加注释的方式说明</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sched
+import sys,time
+
+# 每次调用的函数，打印round和执行的时间
+def event(round):
+    print "Round %s,time:%s" %(round,time.time())
+
+# 初始化scheduler
+scheduler = sched.scheduler(time.time, time.sleep)
+# 获得执行调度的初始时间
+inittime = time.time()
+
+# 总运行次数
+total_round = 10
+# 运行间隔
+interval = 1
+# 计数
+update = 0
+
+while update <= interval * total_round:
+
+    # 设定调度 使用enterabs设定真实执行时间
+    # 参数：1 执行时间（time.time格式）2 优先级 3 执行的函数 4 函数参数
+    scheduler.enterabs(inittime + update, 1, event, (update,))
+
+    # 执行调度，会一直阻塞在这里，直到函数执行结束
+    scheduler.run()
+
+    # 输出屏幕
+    sys.stdout.flush()
+
+    # 增加计数值
+    update = update + interval
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+通过这种方式，我们可以准确的获得两次采样的数据值和间隔时间，通过种种方式计算的使用率是相对比较准确的</p>
+
+</div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
