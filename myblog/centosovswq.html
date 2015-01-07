@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+<div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+CentOS7 配置ovs网桥</h1>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+配置ovs port eth0</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+编辑/etc/sysconfig/network-scripts/ifcfg-eth0</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+DEVICE=eth0
+ONBOOT=yes
+DEVICETYPE=ovs
+TYPE=OVSPort
+OVS_BRIDGE=ovsbr0
+BOOTPROTO=none
+HOTPLUG=no
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+配置ovs br ovsbr0 dhcp方式</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+编辑/etc/sysconfig/network-scripts/ifcfg-ovsbr0</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+DEVICE=ovsbr0
+ONBOOT=yes
+DEVICETYPE=ovs
+TYPE=OVSBridge
+OVSBOOTPROTO="dhcp"
+OVSDHCPINTERFACES="eth0"
+HOTPLUG=no
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+配置ovs br ovsbr0 static方式</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+
+DEVICE=ovsbr0
+ONBOOT=yes
+DEVICETYPE=ovs
+TYPE=OVSBridge
+BOOTPROTO=static
+IPADDR=10.211.55.11
+NETMASK=255.255.255.0
+HOTPLUG=no
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+重启网络，查看ifconfig和ovs-vsctl show</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+[root@localhost network-scripts]# ifconfig
+eth0: flags=4163  mtu 1500
+        ether 00:1c:42:79:60:28  txqueuelen 1000  (Ethernet)
+        RX packets 706  bytes 55888 (54.5 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 207  bytes 43479 (42.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+ovsbr0: flags=4163  mtu 1500
+        inet 10.211.55.11  netmask 255.255.255.0  broadcast 10.211.55.255
+        inet6 fe80::21c:42ff:fe79:6028  prefixlen 64  scopeid 0x20
+        inet6 fdb2:2c26:f4e4:0:21c:42ff:fe79:6028  prefixlen 64  scopeid 0x0
+        ether 00:1c:42:79:60:28  txqueuelen 0  (Ethernet)
+        RX packets 706  bytes 55888 (54.5 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 205  bytes 43323 (42.3 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+[root@localhost network-scripts]# ovs-vsctl show 
+1db31584-cd5e-416a-887d-7ef5c277fde5
+    Bridge "ovsbr0"
+        Port "ovsbr0"
+            Interface "ovsbr0"
+                type: internal
+        Port "eth0"
+            Interface "eth0"
+    ovs_version: "2.3.0"
+</code></pre>
+</div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
