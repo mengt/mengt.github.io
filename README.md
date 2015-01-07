@@ -1,6 +1,4 @@
 mengt.github.io
 ===============
 
-To eke out a living Live is better than burning
-
-This is my first blog, I want to show by him to a process, in the company learned a lot of hope and everyone share communication
+本博客为分享技术为目的，记录鄙人使用过的技术和感觉值得参考的案例。
