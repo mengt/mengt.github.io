@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Mengt.github.io : To eke out a living Live is better than burning">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Welcome to My Blod</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mengt">View on GitHub</a>
+
+          <h1 id="project_title">Ment.Niu</h1>
+          <h2 id="project_tagline">To eke out a living Live is better than burning</h2>
+
+        </header>
+    </div>
+<div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+
+<h1 style="font-size:2.5em; margin:1em 0px 15px; line-height:1.7; padding:0px; position:relative; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:rgb(221,221,221); color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif">
+CentOS7安装KVM libvirt(with ovs)</h1>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+#安装KVM
+
+ yum install qemu-kvm
+
+#安装libvirt
+
+ yum install libvirt
+
+#配置libvirt服务
+
+  service libvirtd start
+  chkconfig libvirtd on
+
+#查看libvirt状态
+
+virsh list
+
+#设置OVS网桥的启动和关闭脚本
+
+#创建/etc/ovs-ifup
+
+#!/bin/sh
+
+switch='ovsbr0'
+/sbin/ifconfig $1 0.0.0.0 up
+ovs-vsctl add-port ${switch} $1
+
+#创建/etc/ovs-ifdown
+
+#!/bin/sh
+
+switch='ovsbr0'
+/sbin/ifconfig $1 0.0.0.0 down
+ovs-vsctl del-port ${switch} $1
+
+#安装virt-install
+
+yum install virt-install
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+创建一个虚拟机</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+首先传输一个ISO镜像到宿主机上，实验环境中上传了一个ubuntu的iso到~/目录下</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+创建一个虚拟机磁盘，用于虚拟机的磁盘存储</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+qemu-img create -f qcow2 ubuntu.qcow2 8G
+</code></pre>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+创建虚拟机出错问题</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+创建虚拟机这一步，我遇到了一个错误，内容如下：</p>
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+Could not access KVM kernel module: Permission denied 
+failed to initialize KVM: Permission denied 
+No accelerator found!
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+可以看出是权限问题，但是不论是sudo还是切换到root，都会出现这个错误，后来网上查了下，做如下处理：</p>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+执行 sudo chown root:kvm /dev/kvm</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+修改/etc/libvirt/qemu.conf，添加 user="root", group="root"</p>
+
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+然后重启一下libvirt-bin:</p>
+
+<pre style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:13px; margin-top:15px; margin-bottom:15px; background-color:rgb(248,248,248); border:1px solid rgb(221,221,221); line-height:19px; overflow:auto; padding:6px 10px; word-wrap:normal; color:rgb(51,51,51)"><code style="font-family:Consolas,'Liberation Mono',Courier,monospace; font-size:12px; margin:0px; padding:0px; border:none; background-color:transparent; word-wrap:normal">
+sudo service libvirt-bin restart，
+</code></pre>
+<p style="margin-top:15px; margin-bottom:15px; color:rgb(51,51,51); font-family:Helvetica,arial,freesans,clean,sans-serif; font-size:15.199999809265137px; line-height:20.399999618530273px">
+问题解决了</p>
+</div>
+<div id="footer_wrap" class="outer">
+      <footer class="inner">
+  <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>
+        Published with <a href="http://pages.github.com">GitHub Pages</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        Blogger <a href="https://github.com/mengt">Ment_niu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        The company <a href="http://www.esage.com.cn">Esage China</a>
+        </p>
+      </footer>
+    </div>
+</body>
+</html>
